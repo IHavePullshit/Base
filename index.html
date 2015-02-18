@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="calculator">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Angular Calculator</title>
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/app/main.js"></script>
+
+</head>
+<body>
+    <div ng-controller="calc" >
+        <p ng-bind="test"></p>
+        <div ng-show="cars.length > 0 "><p>{{tableHead}}</p><table>
+            <tr ng-class="{selected : car.selected}" ng-repeat="car in cars track by $index">
+               <td><input type="checkbox" ng-model="car.selected"/></td>
+                <td>{{car.value}}</td>
+                <td ng-style="{color : car.color}">{{car.color}}</td>
+            </tr>
+        </table>
+        </div>
+        <div ng-include="'empty.html'">asd</div>
+        <input type="text" ng-model="car.value"/>
+        <select ng-model="car.color" ng-options="color for color in colors"></select>
+        <a ng-href="#fuck" ng-click="fuck(car)">click</a>
+        <input ng-model="color"/>
+        <a ng-href="#fauck" ng-click="add(color)">click</a>
+        <a ng-hide="showAlert" ng-click="showAlertFunc()" ng-href="#show" >Show </a>
+        <div ng-show="showAlert" mydirective what="fuck" close="closeAlert()"></div>
+       
+
+
+    </div>
+
+</body>
+</html>
