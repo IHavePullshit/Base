@@ -136,14 +136,17 @@ calculator.controller("dragableController", function ($scope) {
 });
 calculator.filter("myownfilter",function(){
     return function(input,  limit){
-        console.log(Array.isArray(input));
-        console.log(input);
+        //console.log(Array.isArray(input));
+        //console.log(input);
         if(!Array.isArray(input))
         return input.substring(0,limit) +" Fuck";
         var arr = [];
         for(var i=0;i<limit;i++)
             input[i] == null ?"" : arr.push(input[i]) ;
-        return arr;
+        console.log("array" + arr.length);
+        if(arr.length !== 0)
+        return arr ;
+        return "Empty Array";
     };
 });
 /* Restrict Table

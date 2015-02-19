@@ -31,7 +31,7 @@
                         <th ng-click="feild='price' ; reverse=!reverse">price</th>
                     </tr>
                 </thead>
-                <tr ng-class="{selected : car.selected}" ng-repeat="car in cars track by $index |  limitTo:(searchFilter)">
+                <tr ng-class="{selected : car.selected}" ng-repeat="car in cars |  orderBy:feild:reverse | limitTo:searchFilter">
                 <td><input type="checkbox" ng-click="pushtoselectedarraycars(car,$index)" ng-model="car.selected" value="{{car.id}}"/></td>
                 <td>{{car.name}}</td>
                 <td ng-style="{color : car.color}">{{car.color}}</td>
