@@ -1,6 +1,7 @@
 {
     "elements": {
-        "accordion": {}
+        "accordion": {},
+        "drag":{}
     },
     "attributes": {}
 }

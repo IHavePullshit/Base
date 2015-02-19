@@ -5,20 +5,23 @@
     <title>Angular Calculator</title>
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
     <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/angular-animate.js"></script>
     <script type="text/javascript" src="js/app/main.js"></script>
 
 </head>
 <body>
     <div ng-controller="calc" >
+        <span drag>Drag THIS :)</span>
         <p ng-bind="test"></p>
         <div ng-show="cars.length > 0 "><p>{{tableHead}}</p><table>
             <tr ng-class="{selected : car.selected}" ng-repeat="car in cars track by $index">
-               <td><input type="checkbox" ng-model="car.selected"/></td>
+                <td><input type="checkbox" ng-click="pushtoselectedarraycars(car,$index)" ng-model="car.selected" value="{{car.id}}"/></td>
                 <td>{{car.value}}</td>
                 <td ng-style="{color : car.color}">{{car.color}}</td>
             </tr>
         </table>
         </div>
+        <button ng-show="countSelectedCars(cars) > 0" ng-click="deletecars($index)">Delete The Last</button>
         <div ng-include="'empty.html'">asd</div>
         <input type="text" ng-model="car.value"/>
         <select ng-model="car.color" ng-options="color for color in colors"></select>
