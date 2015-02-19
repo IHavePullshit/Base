@@ -6,24 +6,41 @@
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
     <script type="text/javascript" src="js/angular.js"></script>
     <script type="text/javascript" src="js/angular-animate.js"></script>
+    <script type="text/javascript" src="js/angular-dragdrop.js"></script>
     <script type="text/javascript" src="js/app/main.js"></script>
 
 </head>
 <body>
+    <div ng-controller="dragableController">
+            <span drag draggable="true" id="drag">draggable box using pure angular js</span>
+            </div>
+
     <div ng-controller="calc" >
-        <span drag>Drag THIS :)</span>
         <p ng-bind="test"></p>
-        <div ng-show="cars.length > 0 "><p>{{tableHead}}</p><table>
-            <tr ng-class="{selected : car.selected}" ng-repeat="car in cars track by $index">
+        <input type="number" ng-model="searchFilter" value="2"/>
+          <pre>Sorting predicate = {{feild}}; reverse = {{reverse}}</pre>
+        <div ng-show="cars.length > 0 "><p>{{tableHead | lowercase}}</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th ng-click="feild='name'; reverse=!reverse">name</th>
+                        <th ng-click="feild='color'; reverse=!reverse">color</th>
+                        <th ng-click="feild='price' ; reverse=!reverse">price</th>
+                    </tr>
+                </thead>
+                <tr ng-class="{selected : car.selected}" ng-repeat="car in cars |  limitTo:(searchFilter) | orederBy:feild:reverse">
                 <td><input type="checkbox" ng-click="pushtoselectedarraycars(car,$index)" ng-model="car.selected" value="{{car.id}}"/></td>
                 <td>{{car.value}}</td>
                 <td ng-style="{color : car.color}">{{car.color}}</td>
-            </tr>
+                <td>{{car.price |  currency:'ILS$'}}</td>
+            </tr> 
         </table>
         </div>
         <button ng-show="countSelectedCars(cars) > 0" ng-click="deletecars($index)">Delete The Last</button>
         <div ng-include="'empty.html'">asd</div>
         <input type="text" ng-model="car.value"/>
+        <input type="number" ng-model="car.price"/>
         <select ng-model="car.color" ng-options="color for color in colors"></select>
         <a ng-href="#fuck" ng-click="fuck(car)">click</a>
         <input ng-model="color"/>

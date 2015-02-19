@@ -1,9 +1,12 @@
 /**
  * Created by Ibrahim on 2/15/2015.
  */
-var calculator = angular.module("calculator", ["ngAnimate"]);
+var calculator = angular.module("calculator", ["ngAnimate","ngDragDrop"]);
 var calcController = calculator.controller("calc", function ($scope) {
     var cars = [];
+    $scope.searchFilter = 2;
+    $scope.reverse = true;
+    $scope.feild="-id"
     $scope.test = "<a>fuck</a>";
     $scope.cars = cars;
     $scope.selectedcars = [];
@@ -85,7 +88,8 @@ calcController.directive("mydirective", function () {
             };
     return  fuckingdirective;
 });
-calcController.directive("drag", function ($document) {
+calculator.controller("dragableController", function ($scope) {
+}).directive("drag", function ($document) {
     return function (scope, element, attr) {
         var StartX = 0, StartY = 0, x = 0, y = 0;
         element.css({
@@ -96,6 +100,13 @@ calcController.directive("drag", function ($document) {
             display: 'block',
             width: '65px'
         });
+        element.attr.draggable = true;
+       $document.on("ondragdrop", ondragdrop);
+                $document.on("drag", drag);
+                console.log($document);
+        function drag(e) {
+            console.log(e);
+        }
         element.on("mousedown", function (event) {
             event.preventDefault();
             StartX = event.screenX - x;
@@ -103,18 +114,22 @@ calcController.directive("drag", function ($document) {
             $document.on("mousemove", mousemove);
             $document.on("mouseup", mouseup);
         });
+        function ondragdrop(event) {
+            cosnole.log(event);
+        }
         function mousemove(event) {
             y = event.screenY - StartY;
             x = event.screenX - StartX;
             element.css({
                 top: y + 'px',
-                left: x + 'px'
+                right: -x + 'px'
             });
-            console.log(event);
         }
-        function mouseup() {
+        function mouseup(event) {
             $document.off('mousemove', mousemove);
             $document.off('mouseup', mouseup);
+            //console.log(event);
+
         }
 
     };

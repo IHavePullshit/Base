@@ -44,3 +44,9 @@ body{
 .ng-leave-active {
  opacity: 0;
 }
+td{
+    border : 1px solid black;
+}
+table{
+    border: 5px solid black ;
+}
