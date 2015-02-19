@@ -2,12 +2,12 @@
  * Created by Ibrahim on 2/15/2015.
  */
 var calculator = angular.module("calculator", ["ngAnimate","ngDragDrop"]);
-var calcController = calculator.controller("calc", function ($scope) {
+var calcController = calculator.controller("calc", function ($scope,$filter) {
     var cars = [];
     $scope.searchFilter = 2;
-    $scope.reverse = true;
-    $scope.feild="-id"
-    $scope.test = "<a>fuck</a>";
+    $scope.reverse = false;
+    $scope.feild="";
+    $scope.test =  $filter("uppercase")("<a>fuck</a>");
     $scope.cars = cars;
     $scope.selectedcars = [];
     $scope.colors = ["red", "blue"];
@@ -134,7 +134,18 @@ calculator.controller("dragableController", function ($scope) {
 
     };
 });
-
+calculator.filter("myownfilter",function(){
+    return function(input,  limit){
+        console.log(Array.isArray(input));
+        console.log(input);
+        if(!Array.isArray(input))
+        return input.substring(0,limit) +" Fuck";
+        var arr = [];
+        for(var i=0;i<limit;i++)
+            input[i] == null ?"" : arr.push(input[i]) ;
+        return arr;
+    };
+});
 /* Restrict Table
  Attribute (default) A <div alert></div>
  Element name E <alert></alert>

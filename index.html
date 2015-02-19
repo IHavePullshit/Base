@@ -18,28 +18,31 @@
     <div ng-controller="calc" >
         <p ng-bind="test"></p>
         <input type="number" ng-model="searchFilter" value="2"/>
-          <pre>Sorting predicate = {{feild}}; reverse = {{reverse}}</pre>
+          <pre>Sorting feild = {{feild}}; reverse = {{reverse}}</pre>
         <div ng-show="cars.length > 0 "><p>{{tableHead | lowercase}}</p>
             <table>
                 <thead>
                     <tr>
                         <th></th>
-                        <th ng-click="feild='name'; reverse=!reverse">name</th>
+                        <th ><a ng-click="feild='name'; reverse=false">{{"name" | myownfilter:2}}</a>
+                        (<a href="" ng-click="feild = '-name'; reverse=false">^</a>)
+                        </th>
                         <th ng-click="feild='color'; reverse=!reverse">color</th>
                         <th ng-click="feild='price' ; reverse=!reverse">price</th>
                     </tr>
                 </thead>
-                <tr ng-class="{selected : car.selected}" ng-repeat="car in cars |  limitTo:(searchFilter) | orederBy:feild:reverse">
+                <tr ng-class="{selected : car.selected}" ng-repeat="car in cars track by $index |  limitTo:(searchFilter)">
                 <td><input type="checkbox" ng-click="pushtoselectedarraycars(car,$index)" ng-model="car.selected" value="{{car.id}}"/></td>
-                <td>{{car.value}}</td>
+                <td>{{car.name}}</td>
                 <td ng-style="{color : car.color}">{{car.color}}</td>
                 <td>{{car.price |  currency:'ILS$'}}</td>
             </tr> 
         </table>
         </div>
+          {{cars  | myownfilter:2 }}
         <button ng-show="countSelectedCars(cars) > 0" ng-click="deletecars($index)">Delete The Last</button>
         <div ng-include="'empty.html'">asd</div>
-        <input type="text" ng-model="car.value"/>
+        <input type="text" ng-model="car.name"/>
         <input type="number" ng-model="car.price"/>
         <select ng-model="car.color" ng-options="color for color in colors"></select>
         <a ng-href="#fuck" ng-click="fuck(car)">click</a>
