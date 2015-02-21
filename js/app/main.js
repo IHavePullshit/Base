@@ -103,7 +103,6 @@ calculator.controller("dragableController", function ($scope) {
         element.attr.draggable = true;
        $document.on("ondragdrop", ondragdrop);
                 $document.on("drag", drag);
-                console.log($document);
         function drag(e) {
             console.log(e);
         }
@@ -114,6 +113,7 @@ calculator.controller("dragableController", function ($scope) {
             $document.on("mousemove", mousemove);
             $document.on("mouseup", mouseup);
         });
+        
         function ondragdrop(event) {
             cosnole.log(event);
         }
@@ -143,7 +143,6 @@ calculator.filter("myownfilter",function(){
         var arr = [];
         for(var i=0;i<limit;i++)
             input[i] == null ?"" : arr.push(input[i]) ;
-        console.log("array" + arr.length);
         if(arr.length !== 0)
         return arr ;
         return "Empty Array";

@@ -1,59 +1,81 @@
 <!DOCTYPE html>
 <html ng-app="calculator">
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Angular Calculator</title>
-    <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
-    <script type="text/javascript" src="js/angular.js"></script>
-    <script type="text/javascript" src="js/angular-animate.js"></script>
-    <script type="text/javascript" src="js/angular-dragdrop.js"></script>
-    <script type="text/javascript" src="js/app/main.js"></script>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Angular Calculator</title>
+        <link rel="stylesheet" type="text/css" href="css/stylesheet.css"/>
+        <script type="text/javascript" src="js/angular.js"></script>
+        <script type="text/javascript" src="js/angular-animate.js"></script>
+        <script type="text/javascript" src="js/angular-dragdrop.js"></script>
+        <script type="text/javascript" src="js/app/main.js"></script>
 
-</head>
-<body>
-    <div ng-controller="dragableController">
+    </head>
+    <body>
+        <div ng-controller="dragableController">
             <span drag draggable="true" id="drag">draggable box using pure angular js</span>
-            </div>
-
-    <div ng-controller="calc" >
-        <p ng-bind="test"></p>
-        <input type="number" ng-model="searchFilter" value="2"/>
-          <pre>Sorting feild = {{feild}}; reverse = {{reverse}}</pre>
-        <div ng-show="cars.length > 0 "><p>{{tableHead | lowercase}}</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th ><a ng-click="feild='name'; reverse=false">{{"name" | myownfilter:2}}</a>
-                        (<a href="" ng-click="feild = '-name'; reverse=false">^</a>)
-                        </th>
-                        <th ng-click="feild='color'; reverse=!reverse">color</th>
-                        <th ng-click="feild='price' ; reverse=!reverse">price</th>
-                    </tr>
-                </thead>
-                <tr ng-class="{selected : car.selected}" ng-repeat="car in cars |  orderBy:feild:reverse | limitTo:searchFilter">
-                <td><input type="checkbox" ng-click="pushtoselectedarraycars(car,$index)" ng-model="car.selected" value="{{car.id}}"/></td>
-                <td>{{car.name}}</td>
-                <td ng-style="{color : car.color}">{{car.color}}</td>
-                <td>{{car.price |  currency:'ILS$'}}</td>
-            </tr> 
-        </table>
         </div>
-          {{cars  | myownfilter:2 }}
-        <button ng-show="countSelectedCars(cars) > 0" ng-click="deletecars($index)">Delete The Last</button>
-        <div ng-include="'empty.html'">asd</div>
-        <input type="text" ng-model="car.name"/>
-        <input type="number" ng-model="car.price"/>
-        <select ng-model="car.color" ng-options="color for color in colors"></select>
-        <a ng-href="#fuck" ng-click="fuck(car)">click</a>
-        <input ng-model="color"/>
-        <a ng-href="#fauck" ng-click="add(color)">click</a>
-        <a ng-hide="showAlert" ng-click="showAlertFunc()" ng-href="#show" >Show </a>
-        <div ng-show="showAlert" mydirective what="fuck" close="closeAlert()"></div>
-       
 
+        <div ng-controller="calc" >
+            <p ng-bind="test"></p>
+            <input type="number" ng-model="searchFilter" value="2"/>
+            <pre>Sorting feild = {{feild}}; reverse = {{reverse}}</pre>
+            <div ng-show="cars.length > 0"><p>{{tableHead| lowercase}}</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th ><a ng-click="feild = 'name';
+                                        reverse = false">{{"name"| myownfilter:2}}</a>
+                                (<a href="" ng-click="feild = '-name';
+                                            reverse = false">^</a>)
+                            </th>
+                            <th ng-click="feild = 'color';
+                                        reverse = !reverse">color</th>
+                            <th ng-click="feild = 'price';
+                                        reverse = !reverse">price</th>
+                        </tr>
+                    </thead>
+                    <tr ng-class="{
+                            selected : car.selected
+                        }" ng-repeat="car in cars| orderBy:feild:reverse | limitTo:searchFilter">
+                        <td><input type="checkbox" ng-click="pushtoselectedarraycars(car, $index)" ng-model="car.selected" value="{{car.id}}"/></td>
+                        <td>{{car.name}}</td>
+                        <td ng-style="{
+                            color : car.color
+                        }">{{car.color}}</td>
+                        <td>{{car.price|  currency:'ILS$'}}</td>
+                    </tr> 
+                </table>
+            </div>
+            {{cars| myownfilter:2 }}
+            <button ng-show="countSelectedCars(cars) > 0" ng-click="deletecars($index)">Delete The Last</button>
+            <div ng-include="'empty.html'">asd</div>
+            <input type="text" ng-model="car.name"/>
+            <input type="number" ng-model="car.price"/>
+            <select ng-model="car.color" ng-options="color for color in colors"></select>
+            <a ng-href="#fuck" ng-click="fuck(car)">click</a>
+            <input ng-model="color"/>
+            <a ng-href="#fauck" ng-click="add(color)">click</a>
+            <a ng-hide="showAlert" ng-click="showAlertFunc()" ng-href="#show" >Show </a>
+            <div ng-show="showAlert" mydirective what="fuck" close="closeAlert()"></div>
 
-    </div>
+            <form name="myForm">
+                <input type="text" ng-bind="SDD324" ng-pattern="/[A-Za-z]{3}[0-9]{3,7}/" s name="name" ng-minlength="6"ng-maxlength="10" ng-required="true" ng-model="car.name" placeholder="What's the name?"/>
+                <input type="text" name="price"  ng-pattern="/[0-9]{1,7}/" ng-model="car.price" placeholder="What's the price?"/>
+                <select name="secondOptions" ng-model="car.color" ng-options="color for color in colors"></select>
+                <button
+                    ng-click="fuck(car)"
+                    ng-disabled="myForm.$invalid && myForm.name.$pristine"
+                    >
+                    Park
+                </button>
+                <mydirective
+                    ng-show="myForm.name.$invalid"
+                    what="Something went wrong!"
+                    >
+            </form>
 
-</body>
+        </div>
+
+    </body>
 </html>

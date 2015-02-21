@@ -1,6 +1,13 @@
 body{
     background: rgba(255,255,255,0.1);
 }
+tr{
+     -webkit-transition: all .2s linear;
+ -moz-transition: all .2s linear;
+ -ms-transition: all .2s linear;
+ -o-transition: all .2s linear;
+ transition: all .2s linear;
+}
 .selected{
     width:30px;
     background: red;
@@ -49,4 +56,14 @@ td{
 }
 table{
     border: 5px solid black ;
+}
+form{
+    margin-top: 50px;
+}
+tr:hover {
+    background: #cccccc;
+}
+tr.selected:hover{
+    background: #66ffff;
+
 }
